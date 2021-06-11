@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 16:16:18 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/10 16:16:39 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/11 19:29:01 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,22 @@ int	reset_files(int stdin_fd, int stdout_fd)
 		close(stdout_fd);
 		return (-1);
 	}
+	return (0);
+}
+
+int	dup_pipe(int fd_in_out, int end, int )
+{
+	if (end == 1)
+	{
+		if (dup2(fd_in_out, 1) < 0)
+			return (-1);
+	}
+	if ()
+	{
+		if (dup2(fd_in_out, 0) < 0)
+			return (-1);
+	}
+	if (close(fd_in_out) < 0)
+		return (-1);
 	return (0);
 }

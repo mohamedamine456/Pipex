@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 13:49:05 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/11 15:28:26 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/11 19:29:06 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,18 @@ void	exec_pipe(t_command *command, char *in_file, char *out_file)
 	int			stdout_fd;
 	int			pipe_fds[2];
 	t_command	*tmp_cmd;
+	int			pid;
 
 	tmp_cmd = command;
 	if (tmp_cmd != NULL)
 	{
 		pipe(pipe_fds);
-		fork();
+		pid = fork();
+		if (pid == 0)
+		{
+		}
 	}
 	open_file(in_file, 0, &stdin_fd);
 	open_file(out_file, 1, &stdout_fd);
 	reset_files(stdin_fd, stdout_fd);
-	(void)command;
 }
