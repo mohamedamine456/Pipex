@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/10 19:06:58 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/11 17:09:39 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ int			open_file(char *file, int type, int *fd);
  * protorypes for commands.c file
  */
 
-t_command	*get_data(char **argv, char **envp);
+t_command	*get_data(char **argv);
 void		print_commands(t_command *command);
+char		**get_paths(char **envp);
+void		replace_commands(t_command **command, char **envp);
 
 /*
  * protorypes for file_open_close.c file
@@ -65,6 +67,7 @@ char		**ft_args_dup(char **args);
 int			ft_args_size(char **args);
 char		**ft_strjoin_args(char **tab, char *str);
 void		ft_free_args(char **args);
+void		ft_free_command(t_command *command);
 
 /*
  * protorypes for libft_functions.c file

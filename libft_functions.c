@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:46:41 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/10 14:57:07 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/11 15:29:10 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	*ft_strjoin(char *s1, char const *s2)
 		str[i + j] = s2[j];
 		j++;
 	}
-	free(s1);		// to remove after
+	free(s1);
 	str[len] = '\0';
 	return (str);
 }

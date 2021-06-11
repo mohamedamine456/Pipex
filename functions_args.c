@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:51:30 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/10 18:10:12 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/11 17:29:03 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ char	**ft_strjoin_args(char **tab, char *str)
  * funtion to free all elements in a table of strings and also the table
 */
 
-void        ft_free_args(char **args)
+void	ft_free_args(char **args)
 {
     int     i;
 
@@ -76,4 +76,13 @@ void        ft_free_args(char **args)
         free(args);
         args = NULL;
     }
+}
+
+void	ft_free_command(t_command *command)
+{
+	if (command->name != NULL)
+		free(command->name);
+	ft_free_args(command->args);
+	free(command);
+	command = NULL;
 }

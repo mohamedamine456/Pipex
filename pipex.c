@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 13:49:05 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/10 20:01:28 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/11 15:28:26 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int main(int argc, char **argv, char **envp)
 		write(1, " in_file cmd1 cmd2 out_file\n", 42);
 		return (1);
 	}
-	command = get_data(argv, envp);
+	command = get_data(argv);
+	replace_commands(&command, envp);
 	print_commands(command);
 	//exec_pipe(command);
 	return (0);
