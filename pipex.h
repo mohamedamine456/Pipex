@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/11 17:09:39 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/12 16:14:59 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_command
  * protorypes for pipex.c file
  */
 
-void		exec_pipe(t_command *command, char *in_file, char *out_file);
+void		exec_pipe(t_command *command, char **envp,char *in_file, char *out_file);
 int			open_file(char *file, int type, int *fd);
 
 /*
@@ -49,6 +49,7 @@ void		replace_commands(t_command **command, char **envp);
 
 int			open_file(char *file, int type, int *fd);
 int			reset_files(int stdin_fd, int stdout_fd);
+int			dup_pipe(int last, int fds[2]);
 
 /*
  * protorypes for ft_split.c file
