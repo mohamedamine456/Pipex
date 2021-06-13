@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 16:16:18 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/12 20:20:01 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 12:58:34 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,11 @@ int	dup_pipe(int last, int fds[2])
 	return (0);
 }
 
-int	dup_pipes(int which, int fds[2], int *pip_in)
+int	dup_pipes(int pip_in)
 {
-	which = 0;
-	if (close(fds[1]) == -1)
+	if (dup2(pip_in, 0) == -1)
 		return (-1);
-	if (dup2(*pip_in, 0) == -1)
-		return (-1);	
+	if (close(pip_in) == -1)
+		return (-1);
 	return (0);
 }

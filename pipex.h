@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/12 19:01:17 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 12:47:53 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void		replace_commands(t_command **command, char **envp);
 int			open_file(char *file, int type, int *fd);
 int			reset_files(int stdin_fd, int stdout_fd);
 int			dup_pipe(int last, int fds[2]);
-int			dup_pipes(int which, int fds[2], int *pip_in);
+int			dup_pipes(int pip_in);
 
 /*
  * protorypes for ft_split.c file
