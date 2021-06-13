@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 14:07:18 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 15:47:27 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,10 @@ void		exec_pipes(t_command *command, char **envp,
  */
 
 t_command	*get_data(char **argv);
-void		print_commands(t_command *command);
 char		**get_paths(char **envp);
 void		replace_commands(t_command **command, char **envp);
+void		replace_path(t_command **tmp, t_command **command,
+				char **paths, char *command_file);
 
 /*
  * protorypes for file_open_close.c file
@@ -88,5 +89,12 @@ char		*ft_strdup(const char *s1);
 char		*ft_substr(char const *s, unsigned int start, size_t len);
 char		*ft_strjoin(char *s1, char const *s2);
 int			ft_strcmp(const char *s1, const char *s2);
+
+/*
+ * prototypes for fatal.c
+ */
+
+void		fatal(t_command **command, char **paths);
+void		print_commands(t_command *command);
 
 #endif

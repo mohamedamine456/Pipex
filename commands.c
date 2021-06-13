@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:01:31 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 14:09:45 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 15:44:49 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,6 @@ t_command	*get_data(char **argv)
 	return (command);
 }
 
-void	print_commands(t_command *command)
-{
-	t_command	*tmp;
-	int			i;
-
-	tmp = command;
-	while (tmp != NULL)
-	{
-		i = 0;
-		printf("name: %15s, args:  ", tmp->name);
-		while (tmp->args[i] != NULL)
-		{
-			printf(" (%d): %15s", i + 1, tmp->args[i]);
-			i++;
-		}
-		printf("\n");
-		tmp = tmp->next;
-	}
-}
-
 char	**get_paths(char **envp)
 {
 	char	**tab;
@@ -67,7 +47,7 @@ char	**get_paths(char **envp)
 	i = 0;
 	path = NULL;
 	tab = NULL;
-	while (envp != NULL && envp[i]!= NULL)
+	while (envp != NULL && envp[i] != NULL)
 	{
 		tab = ft_split(envp[i], '=');
 		if (tab != NULL && tab[0] != NULL)
@@ -92,42 +72,42 @@ void	replace_commands(t_command **command, char **envp)
 	char		**paths;
 	char		*command_file;
 	t_command	*tmp;
-	int			i;
-	int			fd;
 
 	tmp = *command;
+	command_file = NULL;
 	paths = get_paths(envp);
 	paths = ft_strjoin_args(paths, ft_strdup("/"));
 	while (tmp != NULL && paths != NULL)
 	{
-		i = 0;
-		fd = -1;
-		while (paths != NULL && paths[i] != NULL)
-		{
-			command_file = ft_strjoin(ft_strdup(paths[i]), tmp->name);
-			fd = open(command_file, O_RDONLY);
-			if (fd >= 0)
-			{
-				close(fd);
-				free(tmp->name);
-				tmp->name = ft_strdup(command_file);
-				tmp->args[0] = ft_strdup(command_file);
-				free(command_file);
-				break ;
-			}
-			free(command_file);
-			i++;
-		}
-		if (fd == -1)
-		{
-			ft_free_command(command);
-			ft_free_args(paths);
-			write(1, "./pipex command not found\n", 26);
-			while(1)
-			{
-			}
-			exit(1);
-		}
+		replace_path(&tmp, command, paths, command_file);
 		tmp = tmp->next;
 	}
+}
+
+void	replace_path(t_command **tmp, t_command **command,
+		char **paths, char *command_file)
+{
+	int	i;
+	int	fd;
+
+	i = 0;
+	fd = -1;
+	while (paths != NULL && paths[i] != NULL)
+	{
+		command_file = ft_strjoin(ft_strdup(paths[i]), (*tmp)->name);
+		fd = open(command_file, O_RDONLY);
+		if (fd >= 0)
+		{
+			close(fd);
+			free((*tmp)->name);
+			(*tmp)->name = ft_strdup(command_file);
+			(*tmp)->args[0] = ft_strdup(command_file);
+			free(command_file);
+			break ;
+		}
+		free(command_file);
+		i++;
+	}
+	if (fd == -1)
+		fatal(command, paths);
 }
