@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 15:47:27 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 17:11:52 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,19 @@ typedef struct s_command
 	struct s_command	*next;
 }						t_command;
 
-/*
- * protorypes for pipex.c file
- */
+typedef struct s_exec_data
+{
+	int			stdin_fd;
+	int			stdout_fd;
+	int			fds[2];
+	t_command	*tmp_cmd;
+	int			pid;
+	int			pip_in;
+	int			len;
+}				t_exec_data;
 
-void		exec_pipe(t_command *command, char **envp,
-				char *in_file, char *out_file);
-int			open_file(char *file, int type, int *fd);
-
 /*
- * protorypes for pipex_bonus.c file
+ * protorypes for exec_pipex.c file
  */
 
 void		exec_pipes(t_command *command, char **envp,
@@ -95,6 +98,7 @@ int			ft_strcmp(const char *s1, const char *s2);
  */
 
 void		fatal(t_command **command, char **paths);
+void		fatal_file(t_command **command, char *in_file);
 void		print_commands(t_command *command);
 
 #endif

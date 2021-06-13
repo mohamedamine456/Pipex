@@ -6,15 +6,16 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 13:49:05 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/12 18:55:58 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 17:03:18 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
-	t_command *command;
+	t_command	*command;
+
 	if (argc != 5)
 	{
 		write(1, "Error: \n", 8);
@@ -24,39 +25,7 @@ int main(int argc, char **argv, char **envp)
 	}
 	command = get_data(argv);
 	replace_commands(&command, envp);
-	exec_pipe(command, envp, argv[1], argv[argc - 1]);
+	exec_pipes(command, envp, argv[1], argv[argc - 1]);
+	ft_free_command(&command);
 	return (0);
-}
-
-void	exec_pipe(t_command *command, char **envp, char *in_file, char *out_file)
-{
-	int			stdin_fd;
-	int			stdout_fd;
-	int			fds[2];
-	t_command	*tmp_cmd;
-	int			pid;
-
-	stdout_fd = 0;
-	tmp_cmd = command;
-	open_file(in_file, 0, &stdin_fd);
-	pipe(fds);
-	while (tmp_cmd != NULL)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			if (tmp_cmd->next != NULL)
-				dup_pipe(0, fds);
-			else
-			{
-				dup_pipe(1, fds);
-				open_file(out_file, 1, &stdout_fd);
-			}
-			execve(tmp_cmd->name, tmp_cmd->args, envp);
-		}
-		tmp_cmd = tmp_cmd->next;
-	}
-	close(fds[0]);
-	close(fds[1]);
-	reset_files(stdin_fd, stdout_fd);
 }

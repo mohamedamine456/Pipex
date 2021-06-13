@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:01:31 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 15:44:49 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 16:17:16 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	replace_commands(t_command **command, char **envp)
 		replace_path(&tmp, command, paths, command_file);
 		tmp = tmp->next;
 	}
+	ft_free_args(paths);
 }
 
 void	replace_path(t_command **tmp, t_command **command,
@@ -101,6 +102,7 @@ void	replace_path(t_command **tmp, t_command **command,
 			close(fd);
 			free((*tmp)->name);
 			(*tmp)->name = ft_strdup(command_file);
+			free((*tmp)->args[0]);
 			(*tmp)->args[0] = ft_strdup(command_file);
 			free(command_file);
 			break ;
