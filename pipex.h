@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 12:47:53 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 14:07:18 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,25 @@
 
 typedef struct s_command
 {
-	char	*name;
-	char	**args;
-	struct	s_command *next;
-}			t_command;
+	char				*name;
+	char				**args;
+	struct s_command	*next;
+}						t_command;
 
 /*
  * protorypes for pipex.c file
  */
 
-void		exec_pipe(t_command *command, char **envp,char *in_file, char *out_file);
+void		exec_pipe(t_command *command, char **envp,
+				char *in_file, char *out_file);
 int			open_file(char *file, int type, int *fd);
 
-void    exec_pipes(t_command *command, char **envp, char *in_file, char *out_file);
+/*
+ * protorypes for pipex_bonus.c file
+ */
+
+void		exec_pipes(t_command *command, char **envp,
+				char *in_file, char *out_file);
 
 /*
  * protorypes for commands.c file
@@ -71,7 +77,7 @@ char		**ft_args_dup(char **args);
 int			ft_args_size(char **args);
 char		**ft_strjoin_args(char **tab, char *str);
 void		ft_free_args(char **args);
-void		ft_free_command(t_command *command);
+void		ft_free_command(t_command **command);
 
 /*
  * protorypes for libft_functions.c file

@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:46:41 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/11 15:29:10 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 13:42:53 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_strlen(const char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] != '\0')
@@ -71,14 +71,12 @@ char	*ft_strjoin(char *s1, char const *s2)
 	char	*str;
 	int		i;
 	int		j;
-	int		len;
 
 	i = 0;
 	j = 0;
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	len = ft_strlen(s1) + ft_strlen(s2);
-	str = malloc((len + 1) * sizeof(char));
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	while (s1[i] != '\0')
@@ -92,13 +90,13 @@ char	*ft_strjoin(char *s1, char const *s2)
 		j++;
 	}
 	free(s1);
-	str[len] = '\0';
+	str[i + j] = '\0';
 	return (str);
 }
 
-int ft_strcmp(const char *s1, const char *s2)
+int	ft_strcmp(const char *s1, const char *s2)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s1[i] != '\0' && s2[i] != '\0')

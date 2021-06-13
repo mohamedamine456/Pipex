@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:01:31 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/11 17:33:53 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 14:09:45 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,11 @@ t_command	*get_data(char **argv)
 		tmp->args = ft_args_dup(tab);
 		tmp->next = NULL;
 		i++;
+		ft_free_args(tab);
 		if (argv[i + 1] == NULL)
 			break ;
 		tmp->next = (t_command *)malloc(sizeof(t_command));
-		tmp = tmp->next;	
+		tmp = tmp->next;
 	}
 	return (command);
 }
@@ -59,9 +60,9 @@ void	print_commands(t_command *command)
 
 char	**get_paths(char **envp)
 {
-	char    **tab;
-	char    *path;
-	int     i;
+	char	**tab;
+	char	*path;
+	int		i;
 
 	i = 0;
 	path = NULL;
@@ -119,9 +120,12 @@ void	replace_commands(t_command **command, char **envp)
 		}
 		if (fd == -1)
 		{
-			ft_free_command(*command);
+			ft_free_command(command);
 			ft_free_args(paths);
 			write(1, "./pipex command not found\n", 26);
+			while(1)
+			{
+			}
 			exit(1);
 		}
 		tmp = tmp->next;
