@@ -6,34 +6,44 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 16:16:18 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 12:58:34 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:57:11 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	open_file(char *file, int type, int *fd)
+int	open_file(char *file, int type)
 {
-	int	tmp_fd;
 	int	new_fd;
 
-	*fd = dup(type);
-	if (*fd < 0)
-		return (-1);
 	if (type)
 		new_fd = open(file, O_WRONLY | O_CREAT | O_TRUNC, S_IWUSR | S_IRUSR);
 	else
 		new_fd = open(file, O_RDONLY, S_IWUSR | S_IRUSR);
 	if (new_fd < 0)
-		return (-1);
-	tmp_fd = dup2(new_fd, type);
-	if (tmp_fd < 0)
 	{
-		close(new_fd);
+		fatal_file(file);
 		return (-1);
 	}
-	close(new_fd);
-	return (0);
+	return (new_fd);
+}
+
+int	dup_file(int file_fd, int type, int *fd)
+{
+	int	tmp_fd;
+
+	if (file_fd != -1)
+	{
+		*fd = dup(type);
+		tmp_fd = dup2(file_fd, type);
+		if (tmp_fd < 0)
+		{
+			close(file_fd);
+			return (-1);
+		}
+		return (0);
+	}
+	return (-1);
 }
 
 int	reset_files(int stdin_fd, int stdout_fd)

@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 19:00:48 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 20:04:54 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_exec_data
  */
 
 void		exec_pipes(t_command *command, char **envp,
-				char *in_file, char *out_file);
+				int in_file, int out_file);
 
 /*
  * protorypes for commands.c file
@@ -60,7 +60,8 @@ void		replace_path(t_command **tmp, t_command **command,
  * protorypes for file_open_close.c file
  */
 
-int			open_file(char *file, int type, int *fd);
+int			open_file(char *file, int type);
+int			dup_file(int file_fd, int type, int *fd);
 int			reset_files(int stdin_fd, int stdout_fd);
 int			dup_pipe(int last, int fds[2]);
 int			dup_pipes(int pip_in);
@@ -99,7 +100,7 @@ int			ft_strcmp(const char *s1, const char *s2);
  */
 
 void		fatal(t_command **command, char **paths);
-void		fatal_file(t_command **command, char *in_file);
+void		fatal_file(char *in_file);
 void		print_commands(t_command *command);
 
 #endif
