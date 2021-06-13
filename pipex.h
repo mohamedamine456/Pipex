@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 17:11:52 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/13 19:00:48 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <stdio.h>
+# include <string.h>
 
 typedef struct s_command
 {
