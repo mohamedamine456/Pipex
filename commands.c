@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:01:31 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/14 09:52:41 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:55:20 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	replace_path(t_command **tmp, t_command **command,
 
 int	check_args(char **args)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (args != NULL && args[i] != NULL)
