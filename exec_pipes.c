@@ -6,20 +6,24 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:08:09 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/14 09:54:37 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/14 17:34:44 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	pipe_fork(t_exec_data *e_data, int out_file, char **envp)
+void	pipe_fork(t_exec_data *e_data, int in_file, int out_file, char **envp)
 {
 	pipe(e_data->fds);
 	e_data->pid = fork();
 	if (e_data->pid == 0)
 	{
 		if (e_data->len == 0)
+		{
+			if (dup_file(in_file, 0, &(e_data->stdin_fd)))
+				return ;
 			dup_pipe(0, e_data->fds);
+		}
 		else
 		{
 			dup_pipe(0, e_data->fds);
@@ -33,9 +37,7 @@ void	pipe_fork(t_exec_data *e_data, int out_file, char **envp)
 		execve(e_data->tmp_cmd->name, e_data->tmp_cmd->args, envp);
 	}
 	e_data->pip_in = e_data->fds[0];
-	close(e_data->fds[1]);
-	e_data->tmp_cmd = e_data->tmp_cmd->next;
-	(e_data->len)++;
+	close(e_data->fds[1]);	
 }
 
 void	exec_pipes(t_command *command, char **envp,
@@ -51,7 +53,9 @@ void	exec_pipes(t_command *command, char **envp,
 		return ;
 	while (e_data.tmp_cmd != NULL)
 	{
-		pipe_fork(&e_data, out_file, envp);
+		pipe_fork(&e_data, in_file, out_file, envp);
+		e_data.tmp_cmd = e_data.tmp_cmd->next;
+		(e_data.len)++;
 	}
 	reset_files(e_data.stdin_fd, e_data.stdout_fd);
 }
