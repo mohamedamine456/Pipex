@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:51:30 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 14:05:35 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:38:40 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	**ft_args_dup(char **args)
 	char	**new_args;
 
 	i = 0;
+	if (args == NULL)
+		return (NULL);
 	len = ft_args_size(args);
 	new_args = (char **)malloc((len + 1) * sizeof(char *));
 	while (args != NULL && args[i] != NULL)

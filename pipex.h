@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:57:20 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 20:04:54 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:45:24 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ char		**get_paths(char **envp);
 void		replace_commands(t_command **command, char **envp);
 void		replace_path(t_command **tmp, t_command **command,
 				char **paths, char *command_file);
+int			check_args(char **args);
 
 /*
  * protorypes for file_open_close.c file

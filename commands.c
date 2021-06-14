@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 19:01:31 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 16:17:16 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:52:41 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_command	*get_data(char **argv)
 	tmp = command;
 	i = 2;
 	while (argv[i + 1] != NULL)
-	{
+	{	
 		tab = ft_split(argv[i], ' ');
 		tmp->name = ft_strdup(tab[0]);
 		tmp->args = ft_args_dup(tab);
@@ -112,4 +112,18 @@ void	replace_path(t_command **tmp, t_command **command,
 	}
 	if (fd == -1)
 		fatal(command, paths);
+}
+
+int	check_args(char **args)
+{
+	int i;
+
+	i = 0;
+	while (args != NULL && args[i] != NULL)
+	{
+		if (!ft_strcmp(args[i], ""))
+			return (1);
+		i++;
+	}
+	return (0);
 }

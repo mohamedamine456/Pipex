@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 14:51:46 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 13:46:12 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:41:56 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	count_s(char *s, char c)
 
 	i = 0;
 	count = 0;
-	while (s[i] != '\0')
+	while (s != NULL && s[i] != '\0')
 	{
 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
 			count++;
@@ -61,7 +61,7 @@ int	car_s(char *s, char c)
 	int	i;
 
 	i = 0;
-	while (s[i] != c && s[i] != '\0')
+	while (s != NULL && s[i] != c && s[i] != '\0')
 		i++;
 	return (i);
 }

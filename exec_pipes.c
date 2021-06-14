@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/13 16:08:09 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 20:19:38 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:32:52 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	pipe_fork(t_exec_data *e_data, int out_file, char **envp)
 			dup_pipe(1, e_data->fds);
 			dup_file(out_file, 1, &(e_data->stdout_fd));
 		}
+		if (e_data->tmp_cmd->name != NULL && ft_strcmp(e_data->tmp_cmd->name, ""))
 		execve(e_data->tmp_cmd->name, e_data->tmp_cmd->args, envp);
 	}
 	e_data->pip_in = e_data->fds[0];

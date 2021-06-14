@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/12 18:51:01 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/13 20:44:45 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/14 09:53:12 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char **argv, char **envp)
 	int			in_file;
 	int			out_file;
 
-	if (argc < 5)
+	if (argc < 5 || check_args(argv + 1))
 	{
 		write(1, "Error: \n", 8);
 		write(1, argv[0], 7);
