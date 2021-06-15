@@ -15,7 +15,6 @@
 void	pipe_fork(t_exec_data *e_data, int in_file, int out_file, char **envp)
 {
 	pipe(e_data->fds);
-	e_data->tmp_cmd->name = replace_commands(e_data->tmp_cmd->name, envp);
 	e_data->pid = fork();
 	if (e_data->pid == 0)
 	{
@@ -34,10 +33,11 @@ void	pipe_fork(t_exec_data *e_data, int in_file, int out_file, char **envp)
 			dup_pipe(1, e_data->fds);
 			dup_file(out_file, 1, &(e_data->stdout_fd));
 		}
+		e_data->tmp_cmd->name = replace_commands(e_data->tmp_cmd->name, envp);
 		execve(e_data->tmp_cmd->name, e_data->tmp_cmd->args, envp);
 	}
 	e_data->pip_in = e_data->fds[0];
-	close(e_data->fds[1]);	
+	close(e_data->fds[1]);
 }
 
 void	exec_pipes(t_command *command, char **envp,
