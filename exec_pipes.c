@@ -15,13 +15,13 @@
 void	pipe_fork(t_exec_data *e_data, int in_file, int out_file, char **envp)
 {
 	pipe(e_data->fds);
+	e_data->tmp_cmd->name = replace_commands(e_data->tmp_cmd->name, envp);
 	e_data->pid = fork();
 	if (e_data->pid == 0)
 	{
 		if (e_data->len == 0)
 		{
-			if (dup_file(in_file, 0, &(e_data->stdin_fd)))
-				return ;
+			dup_file(in_file, 0, &(e_data->stdin_fd));
 			dup_pipe(0, e_data->fds);
 		}
 		else
@@ -49,8 +49,6 @@ void	exec_pipes(t_command *command, char **envp,
 	e_data.pip_in = 0;
 	e_data.tmp_cmd = command;
 	e_data.len = 0;
-	if (dup_file(in_file, 0, &(e_data.stdin_fd)))
-		return ;
 	while (e_data.tmp_cmd != NULL)
 	{
 		pipe_fork(&e_data, in_file, out_file, envp);

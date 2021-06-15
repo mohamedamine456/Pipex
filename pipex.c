@@ -28,7 +28,6 @@ int	main(int argc, char **argv, char **envp)
 	command = get_data(argv);
 	in_file = open_file(argv[1], 0);
 	out_file = open_file(argv[4], 1);
-	replace_commands(&command, envp);
 	exec_pipes(command, envp, in_file, out_file);
 	ft_free_command(&command);
 	return (0);

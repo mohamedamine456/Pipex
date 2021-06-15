@@ -52,9 +52,8 @@ void		exec_pipes(t_command *command, char **envp,
 
 t_command	*get_data(char **argv);
 char		**get_paths(char **envp);
-void		replace_commands(t_command **command, char **envp);
-void		replace_path(t_command **tmp, t_command **command,
-				char **paths, char *command_file);
+char		*replace_commands(char *str, char **envp);
+char		*replace_path(char *str, char **paths, char *command_file);
 int			check_args(char **args);
 
 /*
@@ -100,7 +99,7 @@ int			ft_strcmp(const char *s1, const char *s2);
  * prototypes for fatal.c
  */
 
-void		fatal(t_command **command, char **paths);
+void		fatal();
 void		fatal_file(char *in_file);
 void		print_commands(t_command *command);
 

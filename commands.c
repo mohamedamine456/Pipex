@@ -61,32 +61,29 @@ char	**get_paths(char **envp)
 				return (tab);
 			}
 			ft_free_args(tab);
+			tab = NULL;
 		}
 		i++;
 	}
 	return (tab);
 }
 
-void	replace_commands(t_command **command, char **envp)
+char	*replace_commands(char *str, char **envp)
 {
 	char		**paths;
 	char		*command_file;
-	t_command	*tmp;
 
-	tmp = *command;
 	command_file = NULL;
 	paths = get_paths(envp);
+	if (paths == NULL)
+		return (str);
 	paths = ft_strjoin_args(paths, ft_strdup("/"));
-	while (tmp != NULL && paths != NULL)
-	{
-		replace_path(&tmp, command, paths, command_file);
-		tmp = tmp->next;
-	}
+	str = replace_path(str, paths, command_file);
 	ft_free_args(paths);
+	return (str);
 }
 
-void	replace_path(t_command **tmp, t_command **command,
-		char **paths, char *command_file)
+char	*replace_path(char *str, char **paths, char *command_file)
 {
 	int	i;
 	int	fd;
@@ -95,23 +92,22 @@ void	replace_path(t_command **tmp, t_command **command,
 	fd = -1;
 	while (paths != NULL && paths[i] != NULL)
 	{
-		command_file = ft_strjoin(ft_strdup(paths[i]), (*tmp)->name);
+		command_file = ft_strjoin(ft_strdup(paths[i]), str);
 		fd = open(command_file, O_RDONLY);
 		if (fd >= 0)
 		{
 			close(fd);
-			free((*tmp)->name);
-			(*tmp)->name = ft_strdup(command_file);
-			free((*tmp)->args[0]);
-			(*tmp)->args[0] = ft_strdup(command_file);
+			free(str);
+			str = ft_strdup(command_file);
 			free(command_file);
-			break ;
+			return (str);
 		}
 		free(command_file);
 		i++;
 	}
 	if (fd == -1)
-		fatal(command, paths);
+		fatal(str);
+	return (NULL);
 }
 
 int	check_args(char **args)

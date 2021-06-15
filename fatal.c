@@ -12,10 +12,8 @@
 
 #include "pipex.h"
 
-void	fatal(t_command **command, char **paths)
+void	fatal()
 {
-	ft_free_command(command);
-	ft_free_args(paths);
 	write(1, "./pipex: command not found\n", 27);
 	exit(127);
 }
