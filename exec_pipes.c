@@ -12,33 +12,7 @@
 
 #include "pipex.h"
 
-void	exec_pipe(t_command *command, int in_file, int out_file, char **envp)
-{
-	t_exec_data e_data;
-
-	e_data.stdout_fd = 0;
-	e_data.pip_in = 0;
-	e_data.tmp_cmd = 0;
-	e_data.len = 0;
-	e_data.child_state = 0;
-	e_data.tmp_cmd = command;
-	while (e_data.tmp_cmd != NULL)
-	{
-		fork_pipe(&e_data, in_file, out_file, envp);
-		// waitpid(e_data.pid, &e_data.child_state, 0);
-		// if (WIFEXITED(e_data.child_state))
-		// {
-		// 	//free_command
-		// 	//reset files
-		// 	exit(WEXITSTATUS(e_data.child_state));
-		// }
-		e_data.tmp_cmd = e_data.tmp_cmd->next;
-		(e_data.len)++;
-	}
-	reset_files(e_data.stdin_fd, e_data.stdout_fd);
-}
-
-void	fork_pipe(t_exec_data *e_data, int in_file, int out_file, char **envp)
+void	pipe_fork(t_exec_data *e_data, int in_file, int out_file, char **envp)
 {
 	pipe(e_data->fds);
 	e_data->pid = fork();
@@ -60,9 +34,26 @@ void	fork_pipe(t_exec_data *e_data, int in_file, int out_file, char **envp)
 			dup_file(out_file, 1, &(e_data->stdout_fd));
 		}
 		e_data->tmp_cmd->name = replace_commands(e_data->tmp_cmd->name, envp);
-		if (execve(e_data->tmp_cmd->name, e_data->tmp_cmd->args, envp) != 0)
-			fatal_execve();
+		execve(e_data->tmp_cmd->name, e_data->tmp_cmd->args, envp);
 	}
 	e_data->pip_in = e_data->fds[0];
 	close(e_data->fds[1]);
+}
+
+void	exec_pipes(t_command *command, char **envp,
+		int in_file, int out_file)
+{
+	t_exec_data	e_data;
+
+	e_data.stdout_fd = 0;
+	e_data.pip_in = 0;
+	e_data.tmp_cmd = command;
+	e_data.len = 0;
+	while (e_data.tmp_cmd != NULL)
+	{
+		pipe_fork(&e_data, in_file, out_file, envp);
+		e_data.tmp_cmd = e_data.tmp_cmd->next;
+		(e_data.len)++;
+	}
+	reset_files(e_data.stdin_fd, e_data.stdout_fd);
 }

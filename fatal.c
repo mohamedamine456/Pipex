@@ -38,7 +38,7 @@ void	fatal_execve()
 	write(1, "./pipex: ", 8);
 	write(1, error, ft_strlen(error));
 	write(1, "\n", 1);
-	exit(0);
+	exit(127);
 }
 
 void	print_commands(t_command *command)
