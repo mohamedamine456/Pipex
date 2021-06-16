@@ -37,14 +37,15 @@ typedef struct s_exec_data
 	int			pid;
 	int			pip_in;
 	int			len;
+	int			child_state;
 }				t_exec_data;
 
 /*
  * protorypes for exec_pipex.c file
  */
 
-void		exec_pipes(t_command *command, char **envp,
-				int in_file, int out_file);
+void		exec_pipe(t_command *command, int in_file, int out_file, char **envp);
+void		fork_pipe(t_exec_data *e_data, int in_file, int out_file, char **envp);
 
 /*
  * protorypes for commands.c file
@@ -101,6 +102,7 @@ int			ft_strcmp(const char *s1, const char *s2);
 
 void		fatal();
 void		fatal_file(char *in_file);
+void		fatal_execve();
 void		print_commands(t_command *command);
 
 #endif

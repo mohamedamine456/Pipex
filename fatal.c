@@ -30,6 +30,17 @@ void	fatal_file(char *in_file)
 	write(1, "\n", 1);
 }
 
+void	fatal_execve()
+{
+	char	*error;
+
+	error = strerror(errno);
+	write(1, "./pipex: ", 8);
+	write(1, error, ft_strlen(error));
+	write(1, "\n", 1);
+	exit(0);
+}
+
 void	print_commands(t_command *command)
 {
 	t_command	*tmp;
