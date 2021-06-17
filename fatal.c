@@ -28,6 +28,7 @@ void	fatal_file(char *in_file)
 	write(1, ": ", 2);
 	write(1, in_file, ft_strlen(in_file));
 	write(1, "\n", 1);
+	exit(0);
 }
 
 void	fatal_execve()
