@@ -32,14 +32,12 @@ typedef struct s_command
 
 typedef struct s_exec_data
 {
-	int			stdin_fd;
-	int			stdout_fd;
 	int			fds[2];
-	t_command	*tmp_cmd;
-	int			pid;
-	int			pip_in;
-	int			len;
-	int			child_state;
+	int			pid1;
+	int			pid2;
+	int			fd0;
+	int			fd1;
+	int			child_state2;
 }				t_exec_data;
 
 /*
