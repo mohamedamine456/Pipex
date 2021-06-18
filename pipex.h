@@ -47,8 +47,6 @@ typedef struct s_exec_data
  */
 
 void		exec_pipe(t_command *command, char *in_file, char *out_file, char **envp);
-void		exec_pipes(t_command *command, char **envp, int in_file, int out_file);
-void		fork_pipe(t_exec_data *e_data, int in_file, int out_file, char **envp);
 
 /*
  * protorypes for commands.c file

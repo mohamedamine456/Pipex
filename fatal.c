@@ -14,15 +14,15 @@
 
 void	fatal(char *error)
 {
-	write(1, "./pipex: ", 9);
-	write(1, error, ft_strlen(error));
-	write(1, "\n", 1);
+	write(2, "./pipex: ", 9);
+	write(2, error, ft_strlen(error));
+	write(2, "\n", 1);
 	exit(1);
 }
 
 void	fatal_command()
 {
-	write(1, "./pipex: command not found\n", 27);
+	write(2, "./pipex: command not found\n", 27);
 	exit(127);
 }
 
@@ -31,11 +31,11 @@ void	fatal_file(char *in_file)
 	char	*error;
 
 	error = strerror(errno);
-	write(1, "./pipex ", 8);
-	write(1, error, ft_strlen(error));
-	write(1, ": ", 2);
-	write(1, in_file, ft_strlen(in_file));
-	write(1, "\n", 1);
+	write(2, "./pipex ", 8);
+	write(2, error, ft_strlen(error));
+	write(2, ": ", 2);
+	write(2, in_file, ft_strlen(in_file));
+	write(2, "\n", 1);
 	exit(0);
 }
 
@@ -44,9 +44,9 @@ void	fatal_execve()
 	char	*error;
 
 	error = strerror(errno);
-	write(1, "./pipex: ", 8);
-	write(1, error, ft_strlen(error));
-	write(1, "\n", 1);
+	write(2, "./pipex: ", 8);
+	write(2, error, ft_strlen(error));
+	write(2, "\n", 1);
 	exit(127);
 }
 
