@@ -28,7 +28,8 @@ int	main(int argc, char **argv, char **envp)
 	command = get_data(argv);
 	in_file = open_file(argv[1], 0);
 	out_file = open_file(argv[4], 1);
-	exec_pipe(command, in_file, out_file, envp);
+	//exec_pipes(command, envp, in_file, out_file);
+	exec_pipe(command, argv[1], argv[argc - 1], envp);
 	ft_free_command(&command);
 	return (0);
 }

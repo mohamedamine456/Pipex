@@ -12,7 +12,15 @@
 
 #include "pipex.h"
 
-void	fatal()
+void	fatal(char *error)
+{
+	write(1, "./pipex: ", 9);
+	write(1, error, ft_strlen(error));
+	write(1, "\n", 1);
+	exit(1);
+}
+
+void	fatal_command()
 {
 	write(1, "./pipex: command not found\n", 27);
 	exit(127);

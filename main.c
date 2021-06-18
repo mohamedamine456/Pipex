@@ -15,8 +15,8 @@ int main(int argc, char **argv, char **envp)
     char    **cmd1;
     char    **cmd2;
 
-    cmd1 = ft_split("/bin/lss -la", ' ');
-    cmd2 = ft_split("/usr/bin/grep file", ' ');
+    cmd1 = ft_split("/bin/ls", ' ');
+    cmd2 = ft_split("/bin/echo hello", ' ');
     if (pipe(fds) == -1)
         perror("./main.c");
     pid1 = fork();
@@ -40,19 +40,14 @@ int main(int argc, char **argv, char **envp)
         dup2(fds[0], 0);
         close(fds[0]);
         dup_file(open_file(argv[argc - 1], 1), 1, &fd1);
+        if (strcmp(cmd2[0], "/bin/echo"))
+            exit(127);
         if (execve(cmd2[0], cmd2, envp) == -1)
             fatal_execve();
     }
     close(fds[0]);
     close(fds[1]);
-    waitpid(pid1, &state_child1, 0);
     waitpid(pid2, &state_child2, 0);
-    if (WIFEXITED(state_child1))
-	{
-		//free_command
-		//reset files
-		//exit(WEXITSTATUS(state_child1));
-	}
     if (WIFEXITED(state_child2))
 	{
 		//free_command

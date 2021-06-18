@@ -106,7 +106,7 @@ char	*replace_path(char *str, char **paths, char *command_file)
 		i++;
 	}
 	if (fd == -1)
-		fatal(str);
+		fatal_command(str);
 	return (NULL);
 }
 
