@@ -44,10 +44,10 @@ char	**get_paths(char **envp)
 	char	*path;
 	int		i;
 
-	i = 0;
+	i = -1;
 	path = NULL;
 	tab = NULL;
-	while (envp != NULL && envp[i] != NULL)
+	while (envp != NULL && envp[++i] != NULL)
 	{
 		tab = ft_split(envp[i], '=');
 		if (tab != NULL && tab[0] != NULL)
@@ -63,7 +63,6 @@ char	**get_paths(char **envp)
 			ft_free_args(tab);
 			tab = NULL;
 		}
-		i++;
 	}
 	return (tab);
 }
@@ -106,7 +105,7 @@ char	*replace_path(char *str, char **paths, char *command_file)
 		i++;
 	}
 	if (fd == -1)
-		fatal_command(str);
+		fatal_command();
 	return (NULL);
 }
 

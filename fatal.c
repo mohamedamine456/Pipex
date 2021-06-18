@@ -20,7 +20,7 @@ void	fatal(char *error)
 	exit(1);
 }
 
-void	fatal_command()
+void	fatal_command(void)
 {
 	write(2, "./pipex: command not found\n", 27);
 	exit(127);
@@ -39,7 +39,7 @@ void	fatal_file(char *in_file)
 	exit(0);
 }
 
-void	fatal_execve()
+void	fatal_execve(void)
 {
 	char	*error;
 

@@ -45,7 +45,12 @@ typedef struct s_exec_data
  * protorypes for exec_pipex.c file
  */
 
-void		exec_pipe(t_command *command, char *in_file, char *out_file, char **envp);
+void		exec_pipe(t_command *command, char *in_file,
+				char *out_file, char **envp);
+void		first_command(t_command *command, char *infile,
+				char **envp, t_exec_data *edata);
+void		second_command(t_command *command, char *outfile,
+				char **envp, t_exec_data *edata);
 
 /*
  * protorypes for commands.c file
@@ -101,9 +106,9 @@ int			ft_strcmp(const char *s1, const char *s2);
  */
 
 void		fatal(char *error);
-void		fatal_command();
+void		fatal_command(void);
 void		fatal_file(char *in_file);
-void		fatal_execve();
+void		fatal_execve(void);
 void		print_commands(t_command *command);
 
 #endif
