@@ -30,5 +30,6 @@ int	main(int argc, char **argv, char **envp)
 	out_file = open_file(argv[4], 1);
 	exec_pipe(command, argv[1], argv[argc - 1], envp);
 	ft_free_command(&command);
+	sleep(20);
 	return (0);
 }

@@ -1,4 +1,20 @@
--rw-r--r--   1 mlachheb  2019   1497 Jun 13 17:01 Makefile
+total 136
+drwxr-xr-x  19 mlachheb  2019    608 Jun 18 15:52 .
+drwxr-xr-x  13 mlachheb  2019    416 Jun 18 15:02 .git
+drwx------  16 mlachheb  2019    512 Jun 18 15:39 ..
+-rwxr-xr-x   1 mlachheb  2019  14688 Jun 18 15:52 pipex
+-rw-r--r--@  1 mlachheb  2019   1032 Jun 16 10:53 test.c
+-rw-r--r--   1 mlachheb  2019   2887 Jun 18 15:48 pipex.h
+-rw-r--r--   1 mlachheb  2019   2802 Jun 18 11:04 commands.c
+-rw-r--r--   1 mlachheb  2019   2438 Jun 18 15:51 exec_pipes.c
+-rw-r--r--   1 mlachheb  2019   2392 Jun 13 13:42 libft_functions.c
+-rw-r--r--   1 mlachheb  2019   2143 Jun 14 09:38 functions_args.c
 -rw-r--r--   1 mlachheb  2019   2106 Jun 14 19:43 file_open_close.c
--rw-r--r--   1 mlachheb  2019      0 Jun 18 11:48 filein
--rw-------   1 mlachheb  2019      0 Jun 18 13:38 fileout
+-rw-r--r--   1 mlachheb  2019   1875 Jun 14 09:41 ft_split.c
+-rw-r--r--   1 mlachheb  2019   1804 Jun 18 15:50 fatal.c
+-rw-r--r--   1 mlachheb  2019   1497 Jun 13 17:01 Makefile
+-rw-r--r--   1 mlachheb  2019   1406 Jun 14 09:55 pipex_bonus.c
+-rw-r--r--   1 mlachheb  2019   1378 Jun 18 15:45 pipex.c
+-rw-r--r--   1 mlachheb  2019      8 Jun 11 15:12 README.md
+-rw-r--r--   1 mlachheb  2019      0 Jun 18 15:45 filein
+-rw-------   1 mlachheb  2019      0 Jun 18 15:53 fileout

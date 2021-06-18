@@ -37,6 +37,7 @@ typedef struct s_exec_data
 	int			pid2;
 	int			fd0;
 	int			fd1;
+	int			child_state1;
 	int			child_state2;
 }				t_exec_data;
 
