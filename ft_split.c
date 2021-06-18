@@ -65,13 +65,3 @@ int	car_s(char *s, char c)
 		i++;
 	return (i);
 }
-
-void	free_all(char **words, int i)
-{
-	while (i >= 0)
-	{
-		free(words[i]);
-		i--;
-	}
-	free(words);
-}

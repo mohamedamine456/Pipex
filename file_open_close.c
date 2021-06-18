@@ -48,12 +48,12 @@ int	dup_file(int file_fd, int type, int *fd)
 
 int	reset_files(int stdin_fd, int stdout_fd)
 {
-	if (dup2(0, stdin_fd) < 0)
+	if (dup2(STDIN, stdin_fd) < 0)
 	{
 		close(stdin_fd);
 		return (-1);
 	}
-	if (dup2(1, stdout_fd) < 0)
+	if (dup2(STDOUT, stdout_fd) < 0)
 	{
 		close(stdout_fd);
 		return (-1);
@@ -67,7 +67,7 @@ int	dup_pipe(int last, int fds[2])
 	{
 		if (close(fds[1]) == -1)
 			return (-1);
-		if (dup2(fds[0], 0) == -1)
+		if (dup2(fds[0], STDIN) == -1)
 			return (-1);
 		if (close(fds[0]) == -1)
 			return (-1);
@@ -76,19 +76,10 @@ int	dup_pipe(int last, int fds[2])
 	{
 		if (close(fds[0]) == -1)
 			return (-1);
-		if (dup2(fds[1], 1) == -1)
+		if (dup2(fds[1], STDOUT) == -1)
 			return (-1);
 		if (close(fds[1]) == -1)
 			return (-1);
 	}
-	return (0);
-}
-
-int	dup_pipes(int pip_in)
-{
-	if (dup2(pip_in, 0) == -1)
-		return (-1);
-	if (close(pip_in) == -1)
-		return (-1);
 	return (0);
 }

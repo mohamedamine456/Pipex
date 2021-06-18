@@ -79,7 +79,6 @@ int			dup_pipes(int pip_in);
 char		**ft_split(char const *s, char c);
 int			count_s(char *s, char c);
 int			car_s(char *s, char c);
-void		free_all(char **words, int i);
 
 /*
  * protorypes for functions_args.c file

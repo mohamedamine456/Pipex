@@ -42,9 +42,7 @@ void	first_command(t_command *command, char *infile,
 	else if (edata->pid1 == 0)
 	{
 		dup_file(open_file(infile, STDIN), STDIN, &(edata->fd0));
-		close(edata->fds[0]);
-		dup2(edata->fds[1], STDOUT);
-		close(edata->fds[1]);
+		dup_pipe(0, edata->fds);
 		command->name = replace_commands(command->name, envp);
 		if (execve(command->name, command->args, envp) == -1)
 			fatal_execve();
@@ -59,9 +57,7 @@ void	second_command(t_command *command, char *outfile,
 		fatal("fork function failed!");
 	else if (edata->pid2 == 0)
 	{
-		close(edata->fds[1]);
-		dup2(edata->fds[0], STDIN);
-		close(edata->fds[0]);
+		dup_pipe(1, edata->fds);
 		dup_file(open_file(outfile, STDOUT), STDOUT, &(edata->fd1));
 		command->next->name = replace_commands(command->next->name, envp);
 		if (execve(command->next->name, command->next->args, envp) == -1)
