@@ -24,9 +24,6 @@ all: $(PIPEX_NAME)
 $(PIPEX_NAME):
 	gcc -Wall -Wextra -Werror $(SRC) $(MAIN) -o $(PIPEX_NAME)
 
-bonus:
-	gcc -Wall -Wextra -Werror $(SRC) $(BONUS_MAIN) -o $(PIPEX_NAME)
-
 clean:
 	echo "No object File to remove"
 

@@ -42,11 +42,17 @@ void	fatal_file(char *in_file)
 void	fatal_execve(void)
 {
 	char	*error;
+	int		error_number;
 
+	error_number = (int)errno;
 	error = strerror(errno);
 	write(2, "./pipex: ", 8);
 	write(2, error, ft_strlen(error));
 	write(2, "\n", 1);
+	if (error_number == 2)
+		exit(127);
+	else if (error_number == 13)
+		exit(126);
 	exit(0);
 }
 
