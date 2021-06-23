@@ -6,7 +6,7 @@
 /*   By: mlachheb <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/10 13:49:05 by mlachheb          #+#    #+#             */
-/*   Updated: 2021/06/14 09:52:24 by mlachheb         ###   ########.fr       */
+/*   Updated: 2021/06/23 12:31:23 by mlachheb         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int	main(int argc, char **argv, char **envp)
 {
 	t_command	*command;
-	int			in_file;
-	int			out_file;
 
 	if (argc != 5 || check_args(argv + 1))
 	{
@@ -26,8 +24,6 @@ int	main(int argc, char **argv, char **envp)
 		return (1);
 	}
 	command = get_data(argv);
-	in_file = open_file(argv[1], 0);
-	out_file = open_file(argv[4], 1);
 	exec_pipe(command, argv[1], argv[argc - 1], envp);
 	ft_free_command(&command);
 	sleep(20);
